@@ -1,0 +1,8 @@
+*/.DS_Store
+vue/dist
+*/node_modules
+nodejs
+/src/admin/*
+pm2.json
+favicon.ico
+package-lock.json
