@@ -1,11 +1,16 @@
 <template>
-	<div class='shopping' @click="shoPayment">
-		<i class="el-icon-goods icon"></i>
-    <span class="num" v-if="num">{{num}}</span>
-	</div>
+  <div>
+  	<div class='shopping' @click="shoPayment">
+  		<i class="el-icon-goods icon"></i>
+      <span class="num" v-if="num">{{num}}</span>
+  	</div>
+    <div class='search' @click="search">
+      <i class="el-icon-search icon"></i>
+    </div>
+  </div>
 </template>
 <style lang="scss">
-.shopping{
+.shopping,.search{
   position: fixed;
   width: 50px;
   height: 50px;
@@ -14,12 +19,11 @@
   background:#fff;
   box-shadow: 0px 5px 5px  rgba(0,0,0,.2);
   z-index: 100;
-  bottom: 60px;
+  bottom: 120px;
   right: 20px;
   text-align: center;
   opacity: .8;
   i.icon{
-    
     font-size: 25px;
     color: #e6a23c;
   }
@@ -35,6 +39,9 @@
     width: 22px;
     color: #fff;
   }
+}
+.search{
+  bottom: 60px;
 }
 </style>
 <script type="text/javascript">
@@ -56,6 +63,11 @@ export default {
     this.$Bus.$off('ShoppingCart',this.ShoppingCart)
   },
   methods:{
+    search(){
+      this.$router.push({
+        name:'selgoods'
+      })
+    },
     shoPayment(){
       this.$router.push({
         name:'payment'

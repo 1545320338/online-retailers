@@ -35,14 +35,14 @@
         <el-form-item label="详细地址" prop="addressnote">
           <el-input placeholder='再多告诉人家一点嘛 qwq' v-model="ruleForm.addressnote"></el-input>
         </el-form-item>
-        <el-form-item label="联系方式" prop="contact">
-          <el-input  v-model="ruleForm.contact"></el-input>
-        </el-form-item>
         <el-form-item label="联系类型" prop="type">
           <el-radio-group v-model="ruleForm.type">
             <el-radio label="QQ"></el-radio>
             <el-radio label="微信"></el-radio>
           </el-radio-group>
+        </el-form-item>
+        <el-form-item label="联系方式" prop="contact">
+          <el-input  v-model="ruleForm.contact"></el-input>
         </el-form-item>
         <el-form-item label="支付类型" >
           <el-radio-group v-model="ruleForm.payType">
@@ -59,10 +59,10 @@
         <el-form-item label="备注" prop="note">
           <el-input placeholder='告诉我你的需求鸭!!'  type="textarea" v-model="ruleForm.note"></el-input>
         </el-form-item>
-        <el-form-item>
+        <!-- <el-form-item>
           <el-button type="primary" @click="submitForm('ruleForm')">当场保存!</el-button>
           <span> 保存后下次就能不用重新填了!</span>
-        </el-form-item>
+        </el-form-item> -->
       </el-form>
     </div>
     <div style="margin: 15px;float: right;">
@@ -75,8 +75,6 @@
       width="300px"
       :close-on-click-modal='false'
       :show-close='false'
-
-      
       >
       <el-input
         type="textarea"
@@ -196,10 +194,10 @@ export default {
         }).then(() => {
           this.$message.success('谢谢宠幸鸭qwq!')
           this.dialogVisible=false
+          this.next()
         }).catch(() => {
           this.$message.error('再检查看看吧qwq!')
         });
-        
       },
       loadCopy(){
         var clipboard = new Clipboard('.urllink')  
@@ -216,8 +214,11 @@ export default {
         })  
       },
       getAlipay(){
+        if(!this.submitForm('ruleForm'))
+          return
+        // if(this.submitForm)
+          // retu¸Z
         var list=[]
-        console.log(this.list)
         this.list.forEach( function(element, index) {
           list.push({
             id : element.id,
@@ -225,31 +226,25 @@ export default {
             index : element.list
           })
         });
-        console.log(list)
-        
         this.$refs['ruleForm'].validate((valid) => {
           this.$api.post('/goodsalipay',{
             list:list,
             userInfo:this.ruleForm
           },(data)=>{
-            
             if(data.msg && data.msg.url){
               var href = 'https://openapi.alipay.com/gateway.do?'
               href+= data.msg.url
               window.open(href, "_blank");
               this.url=href
               this.dialogVisible=true
+              this.delShopingCart();
             }else if(data.msg){
               this.$message({
                 message:"下单成功鸭!\(^o^)/",
                 type:'success'
               })
               this.delShopingCart();
-              setTimeout(()=>{
-                this.$router.push({
-                  name:'index'
-                })
-              },2000)
+              this.next()
             }
             // window.open(href);
             
@@ -278,19 +273,22 @@ export default {
         this.list=[]
       },
       next(){
-        this.$router.push({
-          name:'index'
-        })
+        setTimeout(()=>{
+          this.$router.push({
+            name:'selgoods'
+          })
+        },2000)
       },
       submitForm(formName) {
+        let isTrue=false;
         this.$refs[formName].validate((valid) => {
           if (valid) {
-            console.log()
             localStorage.address=JSON.stringify(this.ruleForm)
             this.$message({
               message:"保存成功!\(^o^)/",
               type:'success'
             })
+            isTrue=true
           } else {
             this.$message({
               message:"有东西没填上哦!",
@@ -299,6 +297,7 @@ export default {
             return false;
           }
         });
+        return isTrue
       },
       resetForm(formName) {
         this.$refs[formName].resetFields();
