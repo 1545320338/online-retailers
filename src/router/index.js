@@ -34,6 +34,11 @@ export default new Router({
       path: '/login',
       component:Login 
     },{
+      name:'orderlist',
+      path:'/orderlist',
+      component:OrderList,
+      meta: {checkLogined: true}
+    },{
       name:'list',
       path:'/list',
       component:List,
@@ -60,11 +65,6 @@ export default new Router({
       name:'selgoods',
       path:'/selgoods',
       component:SelGoods
-    },{
-      name:'orderlist',
-      path:'/orderlist',
-      component:OrderList,
-      meta: {checkLogined: true}
     }
   ]
 })

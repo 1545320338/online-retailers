@@ -1,6 +1,7 @@
 <template>
   <el-row style="height:100%;"  v-loading="loading" >
     <h3 style='margin: 10px'> 这是查询订单页面</h3>
+    <h3 style='margin: 10px'> 接不起短信验证,嘤嘤嘤</h3>
     <h3 style='margin: 10px'> 十五分钟未支付的单会被删掉哦QAQ</h3>
     <el-input style='padding: 0 10px;width: 90%;' placeholder="请输入下单手机号码查询" v-model="phone" class="input-with-select">
       <el-button slot="append" @click='selPhone' icon="el-icon-search"></el-button>
