@@ -1,6 +1,7 @@
 <template>
   <el-row style="height:100%;"  v-loading="loading" >
-    <h3 style='margin: 10px'> 超过十五分钟未支付的单会被删除哦!</h3>
+    <h3 style='margin: 10px'> 这是查询订单页面</h3>
+    <h3 style='margin: 10px'> 十五分钟未支付的单会被删掉哦QAQ</h3>
     <el-input style='padding: 0 10px;width: 90%;' placeholder="请输入下单手机号码查询" v-model="phone" class="input-with-select">
       <el-button slot="append" @click='selPhone' icon="el-icon-search"></el-button>
     </el-input>
@@ -15,7 +16,6 @@
           <el-table-column
             prop="title"
             label="商品清单"
-            fixed
             width="150">
             <template slot-scope="scope">
               <span v-html="scope.row.title"></span>
@@ -73,6 +73,7 @@
         <el-button type="primary" @click="paysuccess">已支付完成</el-button>
       </span>
     </el-dialog>
+    <shop-ping></shop-ping>
   </el-row>
 </template>
 <style lang="scss">
@@ -88,7 +89,11 @@
 <script>
 let moment = require('moment');
 let Clipboard = require('clipboard')
+let shopPing = require('../components/shopping.vue').default
 export default {
+    components: {
+      shopPing:shopPing
+    },
     data() {
       return {
         goodslist:[],
@@ -98,8 +103,6 @@ export default {
         not:false,
         dialogVisible:false
       }
-    },
-    components: {
     },
     created(){
       
