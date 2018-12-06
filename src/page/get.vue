@@ -5,7 +5,8 @@
       <el-step title="确认" icon="el-icon-view"></el-step>
       <el-step title="支付" icon="el-icon-success"></el-step>
     </el-steps>
-    &nbsp; <el-button style="margin-top: 12px;" @click="next">回去重新选购鸭 qwq</el-button>
+    &nbsp; <el-button style="margin-top: 12px;" @click="$router.push({name:'index'})"> <i class="el-icon-back
+"></i> 回去重新选购鸭 qwq</el-button>
     <div class="list">
       商品清单:
       <div v-for='item in list' class="getitem">
@@ -308,7 +309,7 @@ export default {
         console.log(list)
         let priceNum=0
         list.forEach( function(element, index) {
-          priceNum += element.price
+          priceNum += element.price * element.num
         });
         this.priceNum=priceNum
       }
