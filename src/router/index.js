@@ -11,7 +11,8 @@ import Index from '@/page/index'
 import Login from '@/admin/login'
 import List from '@/admin/list'
 import Goods from '@/admin/goods'
-import UserGoods from '@/admin/usergoods'
+import OrderList from '@/admin/orderlist'
+import UserGoods from '@/page/usergoods'
 import Payment from '@/page/payment'
 import Get from '@/page/get'
 import SelGoods from '@/page/selgoods'
@@ -59,6 +60,11 @@ export default new Router({
       name:'selgoods',
       path:'/selgoods',
       component:SelGoods
+    },{
+      name:'orderlist',
+      path:'/orderlist',
+      component:OrderList,
+      meta: {checkLogined: true}
     }
   ]
 })
