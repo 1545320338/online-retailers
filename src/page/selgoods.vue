@@ -184,7 +184,7 @@ export default {
             element.date=moment(element.date).format('YY-MM-DD')
             element.title=element.title.replace(/\)/g,')<br/>')
             element.goodsInfo.forEach((element2)=>{
-              element.price+=element2.price
+              element.price+=element2.price*element2.num
             })
           })
           this.goodslist=msg

@@ -1,5 +1,5 @@
 **/.DS_Store
-vue/dist
+/dist
 **/node_modules
 nodejs
 /src/admin/*
